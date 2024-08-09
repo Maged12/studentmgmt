@@ -9,14 +9,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
+@Data
 @Entity
 @Table(name = "transcripts")
 public class Transcript {
@@ -28,10 +26,5 @@ public class Transcript {
     @NotEmpty(message = "Degree Title cannot be empty string")
     @NotBlank(message = "Degree Title cannot be blank space(s)")
     private String degreeTitle;
-
-    @Override
-    public String toString() {
-        return "Transcript [transcriptId=" + transcriptId + ", degreeTitle=" + degreeTitle + "]";
-    }
 
 }

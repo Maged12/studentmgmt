@@ -14,16 +14,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "classrooms")
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
+@Data
 public class Classroom {
     // classroomId: primaryKey, buildingName, roomNumber
     @Id
@@ -39,13 +38,7 @@ public class Classroom {
     @NotBlank(message = "Room Number cannot be blank space(s)")
     private String roomNumber;
 
-    @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "classroom")
     private List<Student> students;
-
-    @Override
-    public String toString() {
-        return "Classroom [classroomId=" + classroomId + ", buildingName=" + buildingName + ", roomNumber=" + roomNumber
-                + ", students=" + students + "]";
-    }
 
 }

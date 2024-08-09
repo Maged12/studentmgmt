@@ -6,31 +6,23 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "courses")
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
-public class Course {
-    @Override
-    public String toString() {
-        return "Course [courseId=" + courseId + ", courseCode=" + courseCode + ", courseName=" + courseName
-                + ", students=" + students + "]";
-    }
+@Data
 
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseId;
@@ -45,7 +37,6 @@ public class Course {
     @NotBlank(message = "Course Name cannot be blank space(s)")
     private String courseName;
 
-    @ManyToMany
-    @JoinTable(name = "student_courses", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
+    @ManyToMany(mappedBy = "courses")
     private List<Student> students;
 }

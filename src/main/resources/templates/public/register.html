@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register New Student</title>
+    <link th:href="@{/css/register.css}" rel="stylesheet">
+</head>
+
+<body>
+    <header th:replace="~{fragments/header :: header}"></header>
+    <div class="content">
+        <h1>Register New Student</h1>
+        <form th:action="@{/eregistrar/register}" th:object="${student}" method="post">
+            <div>
+                <label for="studentNumber">Student Number:</label>
+                <input type="text" id="studentNumber" th:field="*{studentNumber}" required>
+            </div>
+            <div>
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" th:field="*{firstName}" required>
+            </div>
+            <div>
+                <label for="middleName">Middle Name:</label>
+                <input type="text" id="middleName" th:field="*{middleName}">
+            </div>
+            <div>
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" th:field="*{lastName}" required>
+            </div>
+            <div>
+                <label for="cgpa">GPA:</label>
+                <input type="number" id="cgpa" th:field="*{cgpa}" step="0.01" required>
+            </div>
+            <div>
+                <label for="transcript">Transcript:</label>
+                <input type="text" id="transcript" th:field="*{transcript.degreeTitle}" required>
+            </div>
+            <div>
+                <label for="classroom">Class Room Number:</label>
+                <input type="text" id="classroom" th:field="*{classroom.roomNumber}" required>
+            </div>
+            <div>
+                <label for="courses">Courses:</label>
+                <input type="text" id="courses" th:field="*{courses}" required>
+            </div>
+            <div>
+                <label for="dateOfEnrollment">Date of Enrollment:</label>
+                <input type="date" id="dateOfEnrollment" th:field="*{dateOfEnrollment}" required>
+            </div>
+            <div>
+                <button type="submit">Register</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

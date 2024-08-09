@@ -8,14 +8,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
+@Data
 @Entity
 @Table(name = "students")
 public class Student {
@@ -45,24 +43,15 @@ public class Student {
     @Temporal(TemporalType.DATE)
     private Date dateOfEnrollment;
 
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinColumn(name = "transcript_id", referencedColumnName = "transcriptId")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "transcript_id", unique = false)
     private Transcript transcript;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "classroom_id")
     private Classroom classroom;
 
     @ManyToMany
     @JoinTable(name = "student_courses", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
     private List<Course> courses;
-
-    @Override
-    public String toString() {
-        return "Student [studentId=" + studentId + ", studentNumber=" + studentNumber + ", firstName=" + firstName
-                + ", middleName=" + middleName + ", lastName=" + lastName + ", cgpa=" + cgpa + ", dateOfEnrollment="
-                + dateOfEnrollment + ", transcript=" + transcript + ", classroom=" + classroom + ", courses=" + courses
-                + "]";
-    }
-
 }
